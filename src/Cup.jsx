@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Eth from 'ethjs'
 import eth from './eth'
-
-const tubAbi = require('./abi/tub.json')
+import tub from './lib/tub'
 
 class Cup extends Component {
 
@@ -12,17 +11,16 @@ class Cup extends Component {
 
   tub = null
 
-  constructor() {
-    super()
-    this.tub = new eth.contract(tubAbi).at('0x448a5065aeBB8E423F0896E6c5D525C040f59af3')
-    window.tub = this.tub
-    eth.getLogs({
-      address: '0x448a5065aeBB8E423F0896E6c5D525C040f59af3', 
-      fromBlock: 4752011, toBlock: 5002941, 
-      topics: ["0x89b8893b806db50897c8e2362c71571cfaeb9761ee40727f683f1793cda9df16"]
-    }).then(logs => {
-      console.log(logs)
+  constructor(props) {
+    super(props)
+    
+    this.tub = tub(eth, this.props.tub)
+    this.tub.getCups().then(logs => {
+      logs.map(x => {
+        console.log(Eth.toBN(x.data).toString())
+      })
     })
+    window.tub = this.tub
   }
 
   componentWillMount() {

@@ -14,7 +14,7 @@ class App extends Component {
         </p>
         <Price name="ETH_USD" address="0x729D19f657BD0614b4985Cf1D82531c67569197B" />
         <Price name="MKR_USD" address="0x99041F808D598B782D5a3e498681C2452A31da08" />
-        <Cup cupi="3" />
+        <Cup tub="0x448a5065aeBB8E423F0896E6c5D525C040f59af3" cupi="3" />
       </div>
     );
   }
